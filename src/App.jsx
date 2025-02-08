@@ -4,10 +4,14 @@ import './App.css'
 import Body from './components/Body'
 import Feed from './components/Feed'
 import Login from './components/Login'
+import { store } from './store/store.js'
+import { Provider } from 'react-redux'
+
 function App() {
 
   return (
     <>
+    <Provider store={store}>
       <BrowserRouter basename="/">
         <Routes>
           <Route path="/" element={<Body />} >
@@ -16,6 +20,7 @@ function App() {
           </Route> 
         </Routes>
       </BrowserRouter>
+      </Provider>
     </>
   )
 }
