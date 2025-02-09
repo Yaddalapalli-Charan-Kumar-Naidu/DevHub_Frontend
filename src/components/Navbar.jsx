@@ -8,7 +8,6 @@ const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const profileRef = useRef(null);
   const dispatch=useDispatch();
-  // Close dropdown when clicking outside
   const user=useSelector((store)=>store.user);
   console.log(user);
   useEffect(() => {

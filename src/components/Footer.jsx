@@ -2,7 +2,7 @@ import { FaGithub, FaLinkedin } from "react-icons/fa";
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-900 text-white py-4 px-6 text-center absolute bottom-0 min-w-screen">
+    <footer className="bg-gray-900 text-white py-4 px-6 text-center fixed-sticky bottom-0 max-w-screen">
       <div className="container mx-auto flex flex-col md:flex-row justify-between items-center">
         {/* Branding */}
         <div className="text-lg font-semibold">Dev Hub © {new Date().getFullYear()}</div>

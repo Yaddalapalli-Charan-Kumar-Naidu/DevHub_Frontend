@@ -16,7 +16,8 @@ const Body = () => {
       const res = await axios.get(url + "/profile/view", {
         withCredentials: true,
       });
-      dispatch(addUser(res.data));
+      console.log("resonse data:",res.data);
+      dispatch(addUser(res?.data?.user));
     } catch (err) {
       if (err.status === 401) {
         navigate("/login");
@@ -30,11 +31,11 @@ const Body = () => {
   }, []);
 
   return (
-    <div>
-      <Navbar/>
-      <Outlet/>
+    <div className='h-screen flex flex-col justify-between'>
+      <Navbar />
+      <Outlet />
 
-      <Footer/>
+      <Footer />
     </div>  
   )
 }
