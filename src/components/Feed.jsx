@@ -4,7 +4,6 @@ import axios from "axios"
 import {useSelector,useDispatch} from 'react-redux';
 import { addFeed } from '../store/feedSlice';
 const Feed = () => {
-  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const feeds=useSelector((store)=>store.feed)
   const dispatch=useDispatch()
@@ -19,16 +18,15 @@ const Feed = () => {
     } catch (err) {
       console.error("Error fetching feed:", err);
       setError(err?.response?.data);
-    } finally {
-      setLoading(false);
-    }
+    } 
   };
 
   useEffect(() => {
     fetchFeed();
   }, []); 
 
-  if (loading) return <p>Loading feed...</p>;
+  if(!feeds) return
+  if(feeds.length<=0) return <h1 className="flex justify-center text-white font-bold my-10 text-3xl">No new users found</h1>
   if (error) return <p className="text-red-500">Error: {error}</p>;
   return (
 

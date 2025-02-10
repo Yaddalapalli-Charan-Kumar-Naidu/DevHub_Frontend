@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addRequests, removeRequest } from "../store/requestSlice";
 
 const Requests = () => {
-  const requests=useSelector((store)=>store.request);
+  const requests=useSelector((store)=>store.requests);
   const dispatch=useDispatch();
   const fetchRequests=async()=>{
     try{

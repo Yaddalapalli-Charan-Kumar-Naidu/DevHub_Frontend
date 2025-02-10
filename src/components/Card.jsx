@@ -18,7 +18,7 @@ const Card = ({ feed }) => {
     <div className="max-w-sm mx-3 md:mx-0 rounded-2xl overflow-hidden shadow-lg p-5 bg-white border border-gray-200">
       <img
         className="w-full h-40 object-cover rounded-lg"
-        src={feed?.profileURL}
+        src={feed?.photoURL}
         alt={`${feed?.firstName} ${feed?.lastName}`}
       />
       <div className="mt-4">

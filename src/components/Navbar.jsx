@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from 'axios'
 import {removeUser} from "../store/userSlice.js"
 import {useDispatch,useSelector} from 'react-redux'
@@ -22,13 +22,14 @@ const Navbar = () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
-
+  const navigate=useNavigate()
   const handleLogout=async()=>{
     try{
     const url=`${import.meta.env.VITE_BASE_URL}/auth/logout`;
     const response=await axios.post(url,{},{withCredentials:true})
     console.log(response?.data?.msg)
     dispatch(removeUser());
+    navigate("/login")
     }
     catch(err){
       console.log("Error occurred")
@@ -74,7 +75,7 @@ const Navbar = () => {
             Requests
           </Link>
           <Link
-            to="/feed"
+            to="/"
             className="block text-white py-2 px-4 hover:bg-gray-700 rounded md:inline-block md:hover:text-gray-300"
             onClick={() => setMenuOpen(false)}
           >
@@ -90,7 +91,7 @@ const Navbar = () => {
         <p className="text-xl mr-2">welcome {user.firstName}</p>
         <button onClick={() => setIsOpen(!isOpen)}>
           <img
-            src={user.profileURL}
+            src={user.photoURL}
             alt="Profile"
             className="w-10 h-10 rounded-full cursor-pointer border-2 border-gray-300"
           />

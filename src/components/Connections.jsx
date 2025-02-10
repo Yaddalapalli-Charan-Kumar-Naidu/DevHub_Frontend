@@ -5,10 +5,8 @@ import { useEffect, useState } from "react";
 
 const Connections = () => {
   const connections = useSelector((store)=>store.connection);
-  const [loading,setLoading]=useState(false)
   const dispatch=useDispatch()
   const fetchConnections=async()=>{
-    setLoading(true);
     try{
       const response=await axios.get(`${import.meta.env.VITE_BASE_URL}/user/connections`,{
         withCredentials:true
@@ -19,17 +17,16 @@ const Connections = () => {
     catch(err){
       console.log("Error fetching connections",err.message);
     }
-    finally{
-      setLoading(false)
-    }
+  
   }
   useEffect(()=>{
     fetchConnections();
   },[])
+  if(!connections) return;
+  if(connections.length===0) return <h1>No connections found</h1>
   return (
     <div className="max-w-screen mx-auto p-6">
       <h2 className="text-2xl font-bold mb-6 text-center">Your Connections</h2>
-      {loading?<div>Loading...</div>:
       <div className="space-y-4">
         {connections?.length === 0 ? (
           <p className="text-gray-500 text-center">No connections yet.</p>
@@ -42,7 +39,7 @@ const Connections = () => {
             >
               <div className="flex items-center">
                 <img
-                  src={connection.profileURL}
+                  src={connection.photoURL}
                   alt={`${connection.firstName} ${connection.lastName}`}
                   className="w-14 h-14 rounded-full border border-gray-300"
                 />
@@ -61,7 +58,7 @@ const Connections = () => {
         )}
         
       </div>
-}
+
       
     </div>
   );
