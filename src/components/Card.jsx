@@ -15,7 +15,7 @@ const Card = ({ feed }) => {
     }
   }
   return (
-    <div className="max-w-sm mx-3 md:mx-0 rounded-2xl overflow-hidden shadow-lg p-5 bg-white border border-gray-200">
+    <div className="max-w-sm mx-3 md:mx-0 rounded-2xl overflow-hidden shadow-lg p-5 bg-base-300 border border-gray-200">
       <img
         className="w-full h-40 object-cover rounded-lg"
         src={feed?.photoURL}

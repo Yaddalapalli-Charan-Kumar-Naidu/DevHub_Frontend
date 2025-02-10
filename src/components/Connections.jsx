@@ -35,7 +35,7 @@ const Connections = () => {
           {connections?.map((connection, index) => (
             <div
               key={index}
-              className="flex items-center justify-between bg-white p-4 shadow-md rounded-lg border border-gray-200"
+              className="flex items-center justify-between bg-base-300 p-4 shadow-md rounded-lg border border-gray-200"
             >
               <div className="flex items-center">
                 <img

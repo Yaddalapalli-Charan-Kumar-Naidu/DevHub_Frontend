@@ -35,7 +35,7 @@ const Requests = () => {
       <h1 className="text-3xl font-bold text-center mb-6">Connection Requests</h1>
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
         {requests?.map((request) => (
-          <div key={request.id} className="bg-white p-4 rounded-xl shadow-md">
+          <div key={request._id} className="bg-base-300 p-4 rounded-xl shadow-md">
             <img src={request.fromUserId.profileURL} alt={`${request.fromUserId.firstName} ${request.fromUserId.lastName}`} className="w-24 h-24 rounded-full mx-auto" />
             <h2 className="text-xl font-semibold mt-4 text-center">{request.fromUserId.firstName} {request.fromUserId.lastName}</h2>
             <p className="text-gray-600 text-center">{request.fromUserId.gender}, {request.fromUserId.age} years old</p>

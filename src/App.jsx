@@ -8,7 +8,8 @@ import store  from './store/store.js'
 import { Provider } from 'react-redux'
 import Connections from "./components/Connections"
 import  Requests from "./components/Requests"
-import Profile from "./components/Profile"
+import Profile from "./components/Profile"  
+import ProtectedRoute from './components/ProtectedRoute.jsx'
 function App() {
 
   return (
@@ -17,11 +18,26 @@ function App() {
       <BrowserRouter basename="/">
         <Routes>
           <Route path="/" element={<Body />} >
-            <Route path="/" element={<Feed />} />
-            <Route path="login" element={<Login/>} />
-            <Route path="connections" element={<Connections/>}/>
-            <Route path="requests" element={<Requests/>}/>
-            <Route path='profile' element={<Profile/>}/>
+            <Route path="/" element={
+              <ProtectedRoute>
+              <Feed />
+              </ProtectedRoute>
+              } />
+            <Route path="login" element={
+              <Login/>
+            }/>
+            <Route path="connections" element={
+              <ProtectedRoute>
+              <Connections/>
+              </ProtectedRoute>}/>
+            <Route path="requests" element={
+              <ProtectedRoute>
+              <Requests/>
+              </ProtectedRoute>}/>
+            <Route path='profile' element={
+              <ProtectedRoute>
+              <Profile/>
+              </ProtectedRoute>}/>
           </Route> 
         </Routes>
       </BrowserRouter>

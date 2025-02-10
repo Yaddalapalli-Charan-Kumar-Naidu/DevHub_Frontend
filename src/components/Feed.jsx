@@ -16,7 +16,6 @@ const Feed = () => {
       console.log(response.data)
       dispatch(addFeed(response?.data?.feed)); 
     } catch (err) {
-      console.error("Error fetching feed:", err);
       setError(err?.response?.data);
     } 
   };
