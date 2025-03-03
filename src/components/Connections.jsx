@@ -2,7 +2,7 @@ import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { addconnection } from "../store/connectionSlice";
 import { useEffect, useState } from "react";
-
+import { Link } from "react-router-dom";
 const Connections = () => {
   const connections = useSelector((store)=>store.connection);
   const dispatch=useDispatch()
@@ -34,7 +34,7 @@ const Connections = () => {
           <div className="max-w-screen grid grid-cosl-1 md:grid-cols-3 gap-2">
           {connections?.map((connection, index) => (
             <div
-              key={index}
+              key={connection._id}
               className="flex items-center justify-between bg-base-300 p-4 shadow-md rounded-lg border border-gray-200"
             >
               <div className="flex items-center">
@@ -50,6 +50,7 @@ const Connections = () => {
                   <p className="text-sm text-gray-500">Skills: {connection.skills}</p>
                   <p className="text-sm text-gray-500">About: {connection.about}</p>
                 </div>
+                <Link to={`/chat/${connection._id}`} className='btn btn-primary'>chat</Link>
               </div>
               
             </div>
