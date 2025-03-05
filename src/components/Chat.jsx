@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { io } from "socket.io-client";
-
+import axios from 'axios';
 const socket = io("http://localhost:6872", { transports: ["websocket"] }); // Persistent socket connection
 
 function Chat() {
@@ -11,7 +11,27 @@ function Chat() {
   const user = useSelector(store => store.user);
   const userId = user?._id;
   const { targetUserId } = useParams();
-
+  const fetchChats = async ()=>{
+    const response=await axios.get("http://localhost:6872/chat/"+targetUserId,{
+      withCredentials:true
+    }
+    );
+    const chatMessages = response?.data?.messages.map((msg) => {
+      const { senderId, message } = msg;
+      return {
+        sender: senderId?._id,
+        firstName: senderId?.firstName,
+        message
+      };
+    });
+    console.log(chatMessages)
+    setMessages(chatMessages);
+    // console.log("all messages:"+JSON.stringify(response.data.messages));
+    // setMessages(response.data.messages);
+  }
+  useEffect(()=>{
+    fetchChats();
+  },[])
   useEffect(() => {
     if (!userId || !targetUserId) return;
 
