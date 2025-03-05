@@ -22,17 +22,11 @@ function Chat() {
     const receiveMessageHandler = (data) => {
       console.log("Received message:", data);
 
-      setMessages(prevMessages => {
-        // Prevent duplicate messages only from the server
-        const messageExists = prevMessages.some(msg => msg.message === data.message && msg.sender === data.sender);
-        if (!messageExists) {
-          return [...prevMessages, data];
-        }
-        return prevMessages;
-      });
+      setMessages(prevMessages => 
+         [...prevMessages, data]
+      );
     };
 
-    socket.off("receiveMessage"); // Remove previous listener
     socket.on("receiveMessage", receiveMessageHandler);
 
     // Cleanup the listener on unmount
@@ -44,11 +38,11 @@ function Chat() {
   const handleSendMessage = () => {
     if (inputValue.trim() === '') return;
 
-    const messageData = { message: inputValue, userId, targetUserId };
+    const messageData = { message: inputValue, firstName:user.firstName,userId, targetUserId };
     console.log("Sending message:", messageData);
 
     socket.emit("sendMessage", messageData); // Send to server
-    setMessages(prevMessages => [...prevMessages, { sender: userId, message: inputValue }]); // Optimistically update UI
+    // setMessages(prevMessages => [...prevMessages, { sender: userId,firstn:user.firstName, message: inputValue }]); // Optimistically update UI
     setInputValue(''); // Clear input after sending
   };
 
@@ -57,10 +51,16 @@ function Chat() {
       <h1 className='text-2xl font-bold mb-4'>Chat</h1>
       <div className="border border-gray-200 rounded-lg h-[70vh] w-[60vw] flex flex-col">
         <div className="flex-1 p-4 overflow-y-auto">
-          {messages.map((msg, index) => (
-            <div key={index} className={`mb-2 p-2 rounded ${msg.sender === userId ? 'bg-blue-500 text-white' : 'bg-gray-300'}`}>
-              {msg.message}
+          {messages?.map((msg, index) => (
+            
+            <div className={`chat ${msg.sender == userId ? 'chat-end' : 'chat-left'}`}>
+              {console.log("sender:"+msg.sender)}{ console.log("user:"+userId)}
+            <div className="chat-header">
+              {msg?.sender===userId?user.firstName:msg.firstName}
+              {/* <time className="text-xs opacity-50">12:45</time> */}
             </div>
+            <div className="chat-bubble">{msg.message}</div>
+          </div>
           ))}
         </div>
         <div className="border-t border-gray-200 p-4 flex">
