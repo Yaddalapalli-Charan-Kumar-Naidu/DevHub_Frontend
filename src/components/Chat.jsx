@@ -12,7 +12,7 @@ function Chat() {
   const userId = user?._id;
   const { targetUserId } = useParams();
   const fetchChats = async ()=>{
-    const response=await axios.get("http://localhost:6872/chat/"+targetUserId,{
+    const response=await axios.get(`${import.meta.env.VITE_BASE_URL||"/api"}/chat/`+targetUserId,{
       withCredentials:true
     }
     );

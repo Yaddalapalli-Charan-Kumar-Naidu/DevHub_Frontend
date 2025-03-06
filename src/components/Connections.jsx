@@ -8,7 +8,7 @@ const Connections = () => {
   const dispatch=useDispatch()
   const fetchConnections=async()=>{
     try{
-      const response=await axios.get(`${import.meta.env.VITE_BASE_URL}/user/connections`,{
+      const response=await axios.get(`${import.meta.env.VITE_BASE_URL||"/api"}/user/connections`,{
         withCredentials:true
       })
       console.log(response.data)

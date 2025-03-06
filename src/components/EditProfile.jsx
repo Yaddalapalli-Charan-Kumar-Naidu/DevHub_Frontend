@@ -22,7 +22,7 @@ export default function EditProfile({user}) {
     setError("");
     try {
       const res = await axios.put(
-        `${import.meta.env.VITE_BASE_URL}/profile/edit`,
+        `${import.meta.env.VITE_BASE_URL||"/api"}/profile/edit`,
         { firstName, lastName, photoURL, age, gender, about, skills },
         { withCredentials: true }
       );

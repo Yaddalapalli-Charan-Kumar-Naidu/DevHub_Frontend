@@ -32,8 +32,8 @@ const Login = () => {
 
     try {
       const url = isSignup
-        ? `${import.meta.env.VITE_BASE_URL}/auth/signup`
-        : `${import.meta.env.VITE_BASE_URL}/auth/login`;
+        ? `${import.meta.env.VITE_BASE_URL||"/api"}/auth/signup`
+        : `${import.meta.env.VITE_BASE_URL||"/api"}/auth/login`;
 
       const response = await axios.post(url, formData, { withCredentials: true });
 
