@@ -3,7 +3,8 @@ import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { io } from "socket.io-client";
 import axios from 'axios';
-const socket = io("http://localhost:6872", { transports: ["websocket"] }); // Persistent socket connection
+const socket = io(import.meta.env.VITE_BASE_URL || "/", { path: "/api/socket.io" });
+
 
 function Chat() {
   const [messages, setMessages] = useState([]);
