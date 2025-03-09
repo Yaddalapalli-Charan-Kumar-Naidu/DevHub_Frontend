@@ -36,7 +36,32 @@ const Body = () => {
     };
 
     fetchUser();
-  }, []);
+  }, [dispatch, navigate, url, userData,cookie]);
+  useEffect(() => {
+    const fetchUser = async () => {
+      if (userData && Object.keys(userData).length > 0) return;
+
+      try {
+        if(cookie){
+        const res = await axios.get(`${url}/profile/view`, {
+          withCredentials: true,
+        });
+       //console.log("Response data:", res?.data);
+        if (res?.data?.user) {
+          dispatch(addUser(res.data.user));
+        }
+      }
+      else{
+        navigate("/login")
+      }
+      } catch (err) {
+        console.error("Error fetching user:", err);
+        navigate("/login");
+      }
+    };
+
+    fetchUser();
+  }, [dispatch, navigate, url, userData,cookie]);
 
   return (
     <div className="h-screen flex flex-col justify-between">
