@@ -8,7 +8,7 @@ const Card = ({ feed }) => {
   const handleResponse=async (response,id)=>{
     try{
       const res=await axios.post(`${import.meta.env.VITE_BASE_URL}/request/send/${response}/${id}`,{},{withCredentials:true})
-      console.log(res.data);
+     //console.log(res.data);
       dispatch(removeFeed(id))
     }catch(err){
       console.error("Error responding to feed:",err.message)

@@ -37,7 +37,7 @@ const Login = () => {
 
       const response = await axios.post(url, formData, { withCredentials: true });
 
-      console.log(`${isSignup ? "Signup" : "Login"} successful:`, response.data.msg);
+     //console.log(`${isSignup ? "Signup" : "Login"} successful:`, response.data.msg);
 
       dispatch(addUser(response?.data?.data))
       navigate("/profile")

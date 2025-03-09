@@ -1,12 +1,14 @@
 import axios from "axios";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addconnection } from "../store/connectionSlice";
-import { useEffect } from "react";
 import { Link } from "react-router-dom";
+import SkeletonLoader from "./SkeletonLoader"; // Import the SkeletonLoader
 
 const Connections = () => {
   const connections = useSelector((store) => store.connection);
   const dispatch = useDispatch();
+  const [loading, setLoading] = useState(true); // Loading state
 
   const fetchConnections = async () => {
     try {
@@ -16,10 +18,11 @@ const Connections = () => {
           withCredentials: true,
         }
       );
-      console.log(response.data);
       dispatch(addconnection(response?.data?.Connections));
     } catch (err) {
       console.log("Error fetching connections", err.message);
+    } finally {
+      setLoading(false); // Stop loading after fetching
     }
   };
 
@@ -27,8 +30,29 @@ const Connections = () => {
     fetchConnections();
   }, []);
 
+  if (loading) {
+    return (
+      <div className="max-w-screen-xl mx-auto p-6">
+        <h2 className="text-3xl font-bold mb-8 text-center text-gray-800 dark:text-gray-200">
+          Your Connections
+        </h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {/* Show 3 skeleton loaders while loading */}
+          <SkeletonLoader />
+          <SkeletonLoader />
+          <SkeletonLoader />
+        </div>
+      </div>
+    );
+  }
+
   if (!connections) return null;
-  if (connections.length === 0) return <h1>No connections found</h1>;
+  if (connections.length === 0)
+    return (
+      <h1 className="flex justify-center items-center min-h-screen text-3xl font-bold text-gray-800 dark:text-gray-200">
+        No connections found
+      </h1>
+    );
 
   return (
     <div className="max-w-screen-xl mx-auto p-6">
