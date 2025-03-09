@@ -49,7 +49,7 @@ const Navbar = () => {
       </button>
 
       {/* Title */}
-      <h1 className="text-2xl font-bold text-blue-400">DevHub</h1>
+      <Link to="/" className="text-2xl font-bold text-blue-400">DevHub</Link>
 
       {/* Sidebar Overlay */}
       {menuOpen && (
