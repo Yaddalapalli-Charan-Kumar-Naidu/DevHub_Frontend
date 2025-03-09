@@ -4,12 +4,12 @@ import { useParams } from "react-router-dom";
 import { io } from "socket.io-client";
 import axios from "axios";
 
-if (import.meta.env.VITE_NODE_ENV === "production") {
+if (import.meta.env.VITE_BASE_URL) {
+  var socket = io(import.meta.env.VITE_BASE_URL);
+} else {
   var socket = io(import.meta.env.VITE_BASE_URL || "/", {
     path: "/api/socket.io",
   });
-} else {
-  var socket = io(import.meta.env.VITE_BASE_URL);
 }
 
 function Chat() {
