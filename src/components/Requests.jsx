@@ -12,7 +12,7 @@ const Requests = () => {
   const fetchRequests = async () => {
     try {
       const response = await axios.get(
-        `${import.meta.env.VITE_BASE_URL}/user/requests/received`,
+        `${import.meta.env.VITE_BASE_URL|| "/api"}/user/requests/received`,
         { withCredentials: true }
       );
       dispatch(addRequests(response.data.requests));

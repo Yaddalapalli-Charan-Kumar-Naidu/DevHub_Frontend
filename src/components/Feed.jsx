@@ -14,7 +14,7 @@ const Feed = () => {
   const fetchFeed = async () => {
     try {
       const response = await axios.get(
-        `${import.meta.env.VITE_BASE_URL}/user/feed`,
+        `${import.meta.env.VITE_BASE_URL||'/api'}/user/feed`,
         {
           withCredentials: true,
         }

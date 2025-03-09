@@ -24,12 +24,12 @@ const Navbar = () => {
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, []);
+  }, [user]);
 
   // Handle logout
   const handleLogout = async () => {
     try {
-      const url = `${import.meta.env.VITE_BASE_URL}/auth/logout`;
+      const url = `${import.meta.env.VITE_BASE_URL|| "/api"}/auth/logout`;
       const response = await axios.post(url, {}, { withCredentials: true });
       dispatch(removeUser());
       navigate("/login");

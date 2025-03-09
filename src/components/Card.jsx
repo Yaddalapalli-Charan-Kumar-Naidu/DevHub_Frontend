@@ -7,7 +7,7 @@ const Card = ({ feed }) => {
   const dispatch=useDispatch()
   const handleResponse=async (response,id)=>{
     try{
-      const res=await axios.post(`${import.meta.env.VITE_BASE_URL}/request/send/${response}/${id}`,{},{withCredentials:true})
+      const res=await axios.post(`${import.meta.env.VITE_BASE_URL|| "/api"}/request/send/${response}/${id}`,{},{withCredentials:true})
      //console.log(res.data);
       dispatch(removeFeed(id))
     }catch(err){

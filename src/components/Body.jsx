@@ -10,7 +10,7 @@ const Body = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const userData = useSelector((store) => store.user);
-  const url = import.meta.env.VITE_BASE_URL;
+  const url = import.meta.env.VITE_BASE_URL|| "/api";
   const [cookie, setCookie] = useState(Cookies.get("token"));
   useEffect(() => {
     const fetchUser = async () => {
