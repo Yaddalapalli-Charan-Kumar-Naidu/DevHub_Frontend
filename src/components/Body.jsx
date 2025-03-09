@@ -36,7 +36,7 @@ const Body = () => {
     };
 
     fetchUser();
-  }, [dispatch, navigate, url, userData,cookie]);
+  }, []);
 
   return (
     <div className="h-screen flex flex-col justify-between">
