@@ -1,15 +1,25 @@
-import React from "react";
+import { useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
-import Cookies from "js-cookie";
+import axios from "axios";
 
 const ProtectedRoute = ({ children }) => {
-    const token = Cookies.get("token"); // Get token from cookies
+  const [isAuthenticated, setIsAuthenticated] = useState(null);
 
-    if (!token) {
-        return <Navigate to="/login" replace />; // Correct way to redirect
-    }
+  useEffect(() => {
+    axios.get(`${import.meta.env.VITE_BASE_URL}/auth/me`, {
+      withCredentials: true,
+    })
+    .then((res) => {
+      setIsAuthenticated(true);
+    })
+    .catch(() => {
+      setIsAuthenticated(false);
+    });
+  }, []);
 
-    return children; // Render protected content if authenticated
+  if (isAuthenticated === null) return <p>Loading...</p>;
+  if (!isAuthenticated) return <Navigate to="/login" replace />;
+  return children;
 };
 
 export default ProtectedRoute;
