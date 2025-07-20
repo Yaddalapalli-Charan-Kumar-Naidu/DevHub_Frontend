@@ -129,11 +129,9 @@ export default function EditProfile({ user }) {
               className="w-full px-3 py-2 rounded-md border border-slate-800 bg-slate-900 text-blue-100 focus:border-blue-400 focus:ring-2 focus:ring-blue-600 transition"
             >
               <option value="">Select Gender</option>
-              <option value="Male">Male</option>
-              <option value="Female">Female</option>
-              <option value="Non-binary">Non-binary</option>
-              <option value="Other">Other</option>
-              <option value="Prefer not to say">Prefer not to say</option>
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+    
             </select>
           </div>
         </div>
